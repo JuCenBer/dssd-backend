@@ -9,7 +9,7 @@ public interface I_API {
 
     ResponseEntity<?> login(LoginDTO req, HttpServletRequest httpReq);
 
-    ResponseEntity<?> crearProyecto(ProyectoDTO req);
+    ResponseEntity<?> crearProyecto(ProyectoDTO req, HttpServletRequest httpReq);
 
     ResponseEntity<?> logout(HttpServletRequest req);
 

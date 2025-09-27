@@ -4,6 +4,7 @@ import grupo16.dssd_backend.dtos.BonitaSession;
 import grupo16.dssd_backend.dtos.LoginDTO;
 import grupo16.dssd_backend.dtos.ProyectoDTO;
 import grupo16.dssd_backend.services.I_BonitaService;
+import grupo16.dssd_backend.services.I_ProyectoService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 class APIControllerV1 implements I_API {
 
     private final I_BonitaService bonitaService;
+    private final I_ProyectoService proyectoService;
 
-    public APIControllerV1(I_BonitaService bonitaService) {
+    public APIControllerV1(I_BonitaService bonitaService, I_ProyectoService proyectoService) {
         this.bonitaService = bonitaService;
+        this.proyectoService = proyectoService;
     }
 
     @Override
@@ -33,9 +36,10 @@ class APIControllerV1 implements I_API {
     }
 
     @Override
-    @PostMapping("crear-proyecto")
-    public ResponseEntity<?> crearProyecto(ProyectoDTO request) {
-        return null;
+    @PostMapping("/crear-proyecto")
+    public ResponseEntity<?> crearProyecto(@RequestBody ProyectoDTO request, HttpServletRequest httpReq) {
+        this.proyectoService.createProject(request);
+        return ResponseEntity.ok().build();
     }
 
     @Override

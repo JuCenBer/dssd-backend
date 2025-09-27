@@ -7,6 +7,7 @@ public record ProyectoDTO(
         String nombre,
         String descripcion,
         String ubicacion,
+        String caseId,
         List<ActividadDTO> actividades
 ) {}
 

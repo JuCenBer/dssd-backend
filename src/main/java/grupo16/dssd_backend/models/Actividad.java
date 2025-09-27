@@ -1,14 +1,30 @@
 package grupo16.dssd_backend.models;
 
+import grupo16.dssd_backend.dtos.ActividadDTO;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Actividad {
 
     private String nombre;
-    private Date fechaInicio;
-    private Date fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private Enum<Recurso> recurso;
     private Boolean requiereColaboracion;
+
+    public Actividad(){
+
+    }
+
+    public Actividad(ActividadDTO actividadDTO){
+        this.nombre = actividadDTO.nombre();
+        this.fechaInicio = actividadDTO.fechaInicio();
+        this.fechaFin = actividadDTO.fechaFin();
+        this.recurso = Recurso.valueOf(actividadDTO.recurso());
+        this.requiereColaboracion = actividadDTO.requiereColaboracion();
+    }
 
     public String getNombre() {
         return nombre;
@@ -18,19 +34,19 @@ public class Actividad {
         this.nombre = nombre;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
