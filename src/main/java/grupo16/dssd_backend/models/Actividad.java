@@ -8,7 +8,7 @@ public class Actividad {
     private Date fechaInicio;
     private Date fechaFin;
     private Enum<Recurso> recurso;
-    private Boolean isColaborativo;
+    private Boolean requiereColaboracion;
 
     public String getNombre() {
         return nombre;
@@ -42,11 +42,11 @@ public class Actividad {
         this.recurso = recurso;
     }
 
-    public Boolean getColaborativo() {
-        return isColaborativo;
+    public Boolean getRequiereColaboracion() {
+        return requiereColaboracion;
     }
 
-    public void setColaborativo(Boolean colaborativo) {
-        isColaborativo = colaborativo;
+    public void setRequiereColaboracion(Boolean requiereColaboracion) {
+        this.requiereColaboracion = requiereColaboracion;
     }
 }

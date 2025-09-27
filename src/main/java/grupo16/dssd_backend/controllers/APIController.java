@@ -1,0 +1,54 @@
+package grupo16.dssd_backend.controllers;
+
+import grupo16.dssd_backend.dtos.BonitaSession;
+import grupo16.dssd_backend.dtos.LoginDTO;
+import grupo16.dssd_backend.dtos.ProyectoDTO;
+import grupo16.dssd_backend.services.I_BonitaService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestController
+@RequestMapping("/api/v1/")
+class APIControllerV1 implements I_API {
+
+    private final I_BonitaService bonitaService;
+
+    public APIControllerV1(I_BonitaService bonitaService) {
+        this.bonitaService = bonitaService;
+    }
+
+    @Override
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO req, HttpServletRequest httpReq) {
+        var cookies = this.bonitaService.loginAndReturnCookies(req.username(), req.password());
+        // guardar en sesión
+        var session = httpReq.getSession(true);
+        session.setAttribute("bonitaSession", new BonitaSession(
+                req.username(), cookies.jsessionId(), cookies.xBonitaToken(), System.currentTimeMillis()));
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    @PostMapping("crear-proyecto")
+    public ResponseEntity<?> crearProyecto(ProyectoDTO request) {
+        return null;
+    }
+
+    @Override
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        try {
+            // opcional: llamar a /bonita/logoutservice con las cookies actuales
+            var bs = (BonitaSession) request.getSession(false).getAttribute("bonitaSession");
+            if (bs != null) bonitaService.logout(bs);
+        } finally {
+            if (request.getSession(false) != null) request.getSession(false).invalidate();
+        }
+        return ResponseEntity.noContent().build();
+    }
+}
+
