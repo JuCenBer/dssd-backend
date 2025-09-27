@@ -1,0 +1,168 @@
+
+{
+    "nav": {
+        "home": "Inicio",
+        "products": "Productos",
+        "services": "Servicios",
+        "admin": "Administracion",
+        "us": "Nosotros",
+        "login": "Iniciar Sesion",
+        "profile": "Perfil",
+        "exit": "Cerrar sesion",
+        "orders": "Pedidos"
+    },
+    "button": {
+      "clear": "Limpiar",
+      "filters": "Mostrar filtros",
+      "create": "Crear",
+      "toggleFilter": "Cambiar filtros",
+      "edit": "Editar"
+    },
+    "label": {
+        "options": {
+            "ConsumidorFinal": "Consumidor Final", 
+            "Monotributo": "Monotributo", 
+            "ResponsableInscripto": "Responsable Inscripto",
+            "ExentoIVA": "Exento IVA",
+            "active": "Activo",
+            "hidden": "Oculto",
+            "blocked": "Bloqueado",
+            "deleted": "Eliminado",
+            "pending": "Pendiente",
+            "facturaA": "Factura A",
+            "facturaB": "Factura B",
+            "facturaC": "Factura C",
+            "DNI": "DNI",
+            "CUIL": "CUIL",
+            "CUIT": "CUIT",
+            "ConsFinal": "Consumidor final"
+        },
+        "ID": "ID",
+        "id": "ID",
+        "name": "Nombre",
+        "email": "Email",
+        "father": "Padre",
+        "state": "Estado",
+        "children": "Hijos",
+        "active": "Activo",
+        "blocked": "Bloqueado",
+        "permissions": "Permisos", 
+        "catalog": "Catalogo",
+        "fathers": "Padres",
+        "price": "Precio",
+        "code": "Codigo",
+        "family": "Familia",
+        "brands": "Marcas",
+        "variants": "Variantes",
+        "registerName": "Nombre Completo / Razon Social",
+        "direction": "Direccion",
+        "cellphone": "Telefono",
+        "actions": "Acciones",
+        "categories": "Categorias",
+        "filters": "Filtros",
+        "search": "Buscar",
+        "role": "Rol",
+        "searchPlaceholder": "Buscar por nombre, codigo o categoria",
+        "identification": "Identificacion (CUIL/CUIT)",
+        "afipSituation": "Situacion AFIP",
+        "fiscalAddress": "Direccion Fiscal",
+        "noRecords": "No se encontraron registros",
+        "add": "Crear",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "hidden": "Ocultar",
+        "addressName": "Nombre (opcional)",
+        "province": "Provincia",
+        "city": "Ciudad",
+        "street": "Calle",
+        "number": "Numero",
+        "postalCode": "Codigo postal",
+        "floor": "Piso",
+        "department": "Departamento",
+        "detail": "Detalle (instrucciones adicionales)" 
+    },
+    "role": {
+        "admin": "Admin",
+        "superadmin": "Super admin",
+        "client": "Cliente",
+        "employee": "Empleado"
+    },
+    "order": {
+        "state": {
+            "en_preparacion": "En Preparacion",
+            "pago_pendiente": "Pago Pendiente",
+            "completed": "Completado",
+            "cancelled": "Cancelado",
+            "desconocido": "Sin estado"
+        }
+    },
+    "state": {
+        "active": "Activo",
+        "deleted": "Eliminado",
+        "hidden": "Oculto",
+        "creating": "Creando"
+    },
+    "us": {
+        "title": "Nosotros",
+        "menu": {
+            "who": "¿Quienes Somos?",
+            "instalaciones": "Instalaciones",
+            "quality": "Políticas de Calidad",
+            "services": "Servicios Ofrecidos"
+        },
+        "who": {
+            "title": "Nuestra historia",
+            "text": "Somos una empresa argentina con más de 40 años de trayectoria, fundada en 1985. Nos especializamos en brindar soluciones integrales en hidráulica y neumática a diversas industrias del ámbito nacional. <br/><br/> <strong>Nuestra misión:</strong> acompañar el desarrollo industrial del país con productos y servicios confiables que marquen la diferencia."
+        },
+        "instalaciones": {
+            "title": "Instalaciones",
+            "text": "-Planta industrial/comercial de 1300 m2 ubicada en Ensenada. <br/> <br/> -Sala de soldaduras. <br/> <br/> -Sector de ensamblado de mangueras hidráulicas e industriales. <br/> <br/> -Tornos, fresas y amortajadoras con reglas de control digital. <br/> <br/> -Bancos de ensayos hidráulicos."
+        },
+        "quality": {
+            "title": "Políticas de Calidad",
+            "text": "Contamos con un sistema de gestión integrado certificado bajo las normas ISO 9001. <br/> <br/> Emitimos certificados:<br/>-Prueba hidráulica y neumática.<br/>-Procesos de soldadura. <br/> -Instrumentales, flexibles y conectores de doble virola en acero inoxidable. <br/> <br/> Identificación y Trazabilidad de los materiales, garantizando la máxima calidad en los productos confeccionados y comercializados."
+        },
+        "services": {
+            "title": "Servicios Ofrecidos",
+            "text": "<strong>Armado de Mangueras y Flexibles</strong> <br/> Mangueras de baja, media y extrema presión. <br/> <strong>Fabricación y Reparación </strong> <br/> Fabricación de piezas especiales según planos o muestras. <br/> Reparación de bombas hidráulicas, actuadores hidráulicos y neumáticos. <br/> Fabricación de sellos especiales. <br/> Adaptación de Piezas según planos o muestras. <strong>Soldaduras Especializadas</strong> <br/> Trabajos en acero inoxidable y aluminio. <br/> Procedimientos certificados: GTAW y SMAW según normas internacionales. <strong>Asistencia Técnica y Logística</strong> <br/> Relevamiento de necesidades en plantas industriales. <br/> Servicio de provisión y entrega de materiales en planta. <br/> Asesoramiento técnico a clientes. <br/> <strong>Certificaciones y Control de Calidad</strong> <br/> Certificados de prueba hidráulica y neumática. <br/>Certificados de procesos de soldadura. <br/> Sistema de identificación y trazabilidad de productos."
+        }
+    },
+    "product": {
+        "code": "Codigo",
+        "backToCatalog": "Volver al catalogo",
+        "availableVariants": "Variantes disponibles"
+    },
+    "catalog": {
+        "showingNResults": "Mostrando {{rows}} resultados de {{count}}",
+        "clearFilters": "Limpiar filtros",
+        "itemsPerPage": "Elementos por pagina",
+        "viewProduct": "Ver producto",
+        "noProductsFound": "No se encontraron productos",
+        "tryRemovingFilters": "Intenta eliminar algunos filtros"
+    },
+    "paginator": {
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "pageNofM": "Pagina {{currentPage}} de {{totalPages}}"
+    },
+    "pagination": {
+        "showing": "Mostrando",
+        "of": "de"
+    },
+    "cart": {
+        "addToCart": "Agregar al carrito",
+        "addToCartSuccess": "Producto agregado al carrito",
+        "addToCartError": "Error al agregar el producto al carrito",
+        "addToCartErrorStock": "No hay stock suficiente para agregar al carrito",
+        "addToCartErrorNotFound": "Producto no encontrado",
+        "addToCartErrorNotAvailable": "Producto no disponible",
+        "addToCartErrorNotValid": "Producto no valido",
+        "addToCartErrorNotValidStock": "Producto no valido o sin stock",
+        "totalProducts": "Articulos Totales: {{totalProducts}} ({{totalQuantity}} unidades)"
+    },
+    "variant": {
+        "removed": "Variante eliminada con exito!",
+        "active": "Variante activada!",
+        "hidden": "Variante ocultada"
+    }
+}
