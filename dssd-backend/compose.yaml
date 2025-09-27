@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    command: [ "postgres", "-c", "TimeZone=America/Argentina/Buenos_Aires" ]
+    environment:
+      - 'POSTGRES_DB=dssd-backend'
+      - 'POSTGRES_PASSWORD=dssd-backend'
+      - 'POSTGRES_USER=dssd-backend'
+    ports:
+      - '5432'

@@ -5,21 +5,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2c8170f-4b08-40fd-98dc-97b9d05a23b2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../compose.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/grupo16/dssd_backend/DssdBackendApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/grupo16/dssd_backend/models/Actividad.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/grupo16/dssd_backend/models/Proyecto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/grupo16/dssd_backend/models/Recurso.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/test/java/grupo16/dssd_backend/DssdBackendApplicationTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../bonita/ProjectPlanning.bos" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/PS-2024-2-Diccionario.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/jsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/404image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/google-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/igrelleno.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/igsinrelleno.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/vite.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/public/wpplogo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/App.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/assets/react.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/Form2.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/GoogleLoginButton.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/ImageLoader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/Inputs.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/ProfileDropdown.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/ProtectedRoute.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/Skeleton.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/SmartForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/badges/RoleBadget.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/components/badges/StateBadget.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useAuth.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useFetchData.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useIsMobile.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useLocalStorage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useNotification.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/hooks/useTheme.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/i18n.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/lang/en/translation.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/lang/es/translation.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/ApiClientSetup.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/BottomNavBar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/Error404.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/Header.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/Index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/Sidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/admin/AdminHeader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/admin/AdminLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/layout/admin/AdminSidebar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/main.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/pages/Form.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/pages/Home.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/pages/Login.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/pages/admin/UserForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/services/apiClient.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/services/authEvents.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/services/notificationService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/src/utils/functions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/tailwind.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../dssd-frontend/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +92,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Dev/Desktop/Repos/dssd-backend/dssd-backend"

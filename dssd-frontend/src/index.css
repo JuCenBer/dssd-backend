@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+button {
+  @apply hover:cursor-pointer;
+}
+
+
+/* ========================================================================== */
+/*                    SISTEMA DE COLORES EMPRESARIAL                          */
+/* ========================================================================== */
+
+/* 
+  INSTRUCCIONES DE USO:
+  1. Para cambiar la paleta de una empresa, solo modifica los valores en :root
+  2. Los colores están organizados por contexto de uso
+  3. Cada color tiene su propósito específico documentado
+  4. Las variables siguen un patrón consistente para fácil memorización
+*/
+
+:root {
+
+  --header-height: 3rem;
+
+
+
+  /* ========================================================================== */
+  /*                         COLORES DE MARCA/EMPRESA                          */
+  /* ========================================================================== */
+  
+  /* COLORES PRINCIPALES DE LA MARCA */
+  --brand-primary: oklch(0.6 0.22 265);    /* Violeta - Color principal de la marca */
+  --brand-secondary: oklch(0.7 0.2 50);    /* Naranja - Color secundario/complementario */
+  --brand-tertiary: oklch(0.65 0.15 180);  /* Cyan - Color terciario para acentos */
+  
+  /* VERSIONES SUAVES DE LA MARCA (para fondos sutiles) */
+  --brand-primary-soft: oklch(0.95 0.05 265);    /* Violeta muy suave */
+  --brand-secondary-soft: oklch(0.96 0.04 50);   /* Naranja muy suave */
+  --brand-tertiary-soft: oklch(0.95 0.03 180);   /* Cyan muy suave */
+
+  /* ========================================================================== */
+  /*                            COLORES NEUTRALES                              */
+  /* ========================================================================== */
+  
+  /* FONDOS PRINCIPALES */
+  --background-primary: oklch(0.99 0.01 240);   /* Fondo principal de la app */
+  --background-secondary: oklch(0.96 0.01 240); /* Fondo secundario, sidebars */
+  --background-tertiary: oklch(0.93 0.01 240);  /* Fondo terciario, secciones */
+  --overlay-backdrop: oklch(0% 0 0 / 0.6);
+  
+  /* FONDOS DE COMPONENTES */
+  --surface-primary: oklch(1 0 0);              /* Tarjetas, modales principales */
+  --surface-secondary: oklch(0.98 0.01 240);    /* Tarjetas secundarias */
+  --surface-tertiary: oklch(0.95 0.01 240);     /* Áreas de contenido anidado */
+  
+  /* TEXTO Y CONTENIDO */
+  --text-primary: oklch(0.11 0.02 240);         /* Texto principal, títulos */
+  --text-secondary: oklch(0.45 0.02 240);       /* Texto secundario, descripciones */
+  --text-tertiary: oklch(0.65 0.02 240);        /* Texto terciario, placeholders */
+  --text-inverse: oklch(0.98 0.01 240);         /* Texto sobre fondos oscuros */
+  
+  /* BORDES Y DIVISORES */
+  --border-primary: oklch(0.9 0.01 240);        /* Bordes principales */
+  --border-secondary: oklch(0.85 0.02 240);     /* Bordes de inputs, elementos interactivos */
+  --border-focus: oklch(0.6 0.22 265);          /* Bordes de foco (mismo que brand-primary) */
+
+  /* ========================================================================== */
+  /*                           COLORES INTERACTIVOS                            */
+  /* ========================================================================== */
+  
+  /* BOTONES PRIMARIOS (Acciones principales) */
+  --interactive-primary: oklch(0.6 0.22 265);        /* Fondo del botón primario */
+  --interactive-primary-hover: oklch(0.55 0.22 265); /* Hover del botón primario */
+  --interactive-primary-text: oklch(0.98 0.01 240);  /* Texto del botón primario */
+  
+  /* BOTONES SECUNDARIOS (Acciones alternativas) */
+  --interactive-secondary: oklch(0.94 0.02 240);        /* Fondo del botón secundario */
+  --interactive-secondary-hover: oklch(0.91 0.02 240);  /* Hover del botón secundario */
+  --interactive-secondary-text: oklch(0.11 0.02 240);   /* Texto del botón secundario */
+  
+  /* LINKS Y ELEMENTOS CLICKEABLES */
+  --link-primary: oklch(0.6 0.22 265);           /* Links principales */
+  --link-primary-hover: oklch(0.55 0.22 265);    /* Hover de links */
+  --link-secondary: oklch(0.45 0.02 240);        /* Links secundarios */
+  --link-secondary-hover: oklch(0.35 0.02 240);  /* Hover de links secundarios */
+
+  /* ========================================================================== */
+  /*                         COLORES DE ESTADO/FEEDBACK                        */
+  /* ========================================================================== */
+  
+  /* ÉXITO */
+  --success-primary: oklch(0.7 0.25 150);        /* Verde para éxito */
+  --success-soft: oklch(0.94 0.05 150);          /* Fondo suave para mensajes de éxito */
+  --success-text: oklch(0.05 0.05 150);          /* Texto sobre fondo de éxito */
+  
+  /* ADVERTENCIA */
+  --warning-primary: oklch(0.8 0.25 80);         /* Amarillo para advertencias */
+  --warning-soft: oklch(0.96 0.05 80);           /* Fondo suave para advertencias */
+  --warning-text: oklch(0.2 0.05 80);            /* Texto sobre fondo de advertencia */
+  
+  /* ERROR/PELIGRO */
+  --error-primary: oklch(0.65 0.25 20);          /* Rojo para errores */
+  --error-soft: oklch(0.96 0.05 20);             /* Fondo suave para errores */
+  --error-text: oklch(0.2 0.05 20);              /* Texto sobre fondo de error */
+  
+  /* INFORMACIÓN */
+  --info-primary: oklch(0.65 0.15 220);          /* Azul para información */
+  --info-soft: oklch(0.95 0.03 220);             /* Fondo suave para información */
+  --info-text: oklch(0.15 0.05 220);             /* Texto sobre fondo de información */
+}
+
+/* ========================================================================== */
+/*                            MODO OSCURO                                     */
+/* ========================================================================== */
+
+.dark {
+  /* COLORES DE MARCA (se mantienen similares pero ajustados) */
+  --brand-primary: oklch(0.7 0.22 265);
+  --brand-secondary: oklch(0.75 0.2 50);
+  --brand-tertiary: oklch(0.7 0.15 180);
+  
+  --brand-primary-soft: oklch(0.2 0.05 265);
+  --brand-secondary-soft: oklch(0.2 0.04 50);
+  --brand-tertiary-soft: oklch(0.2 0.03 180);
+  
+  /* FONDOS */
+  --background-primary: oklch(0.11 0.02 240);
+  --background-secondary: oklch(0.15 0.02 240);
+  --background-tertiary: oklch(0.18 0.02 240);
+  
+  --surface-primary: oklch(0.15 0.02 240);
+  --surface-secondary: oklch(0.18 0.02 240);
+  --surface-tertiary: oklch(0.21 0.02 240);
+  
+  /* TEXTO */
+  --text-primary: oklch(0.98 0.01 240);
+  --text-secondary: oklch(0.75 0.02 240);
+  --text-tertiary: oklch(0.55 0.02 240);
+  --text-inverse: oklch(0.11 0.02 240);
+  
+  /* BORDES */
+  --border-primary: oklch(0.25 0.02 240);
+  --border-secondary: oklch(0.3 0.02 240);
+  --border-focus: oklch(0.7 0.22 265);
+  
+  /* INTERACTIVOS */
+  --interactive-primary: oklch(0.7 0.22 265);
+  --interactive-primary-hover: oklch(0.75 0.22 265);
+  --interactive-primary-text: oklch(0.11 0.02 240);
+  
+  --interactive-secondary: oklch(0.25 0.02 240);
+  --interactive-secondary-hover: oklch(0.3 0.02 240);
+  --interactive-secondary-text: oklch(0.98 0.01 240);
+  
+  --link-primary: oklch(0.7 0.22 265);
+  --link-primary-hover: oklch(0.75 0.22 265);
+  --link-secondary: oklch(0.75 0.02 240);
+  --link-secondary-hover: oklch(0.85 0.02 240);
+  
+  /* ESTADOS (ajustados para mejor contraste en modo oscuro) */
+  --success-primary: oklch(0.65 0.25 150);
+  --success-soft: oklch(0.2 0.05 150);
+  --success-text: oklch(0.85 0.05 150);
+  
+  --warning-primary: oklch(0.75 0.25 80);
+  --warning-soft: oklch(0.2 0.05 80);
+  --warning-text: oklch(0.9 0.05 80);
+  
+  --error-primary: oklch(0.6 0.25 20);
+  --error-soft: oklch(0.2 0.05 20);
+  --error-text: oklch(0.9 0.05 20);
+  
+  --info-primary: oklch(0.7 0.15 220);
+  --info-soft: oklch(0.2 0.03 220);
+  --info-text: oklch(0.85 0.05 220);
+}
+
+
+/* ========================================================================== */
+/*                      EXTENSIÓN PARA LAYOUT DE ADMIN                        */
+/* ========================================================================== */
+
+/* Lo aplicaremos al div principal del AdminLayout */
+.admin-layout {
+  /*
+    Valores ajustados para lograr el look profesional y azulado/violáceo
+    oscuro de tu imagen de referencia.
+  */
+
+  /*
+    CAMBIO CLAVE: En lugar de un gris casi negro, usamos un tono muy oscuro
+    y desaturado de tu color primario (violeta). Esto le da el matiz azulado.
+  */
+  /* Anterior: oklch(0.11 0.02 240) */
+  --admin-sidebar-bg: oklch(0.18 0.035 265); /* Violeta muy oscuro y desaturado */
+  
+  /*
+    El borde será un poco más claro que el fondo del sidebar para crear
+    una sutil separación.
+  */
+  /* Anterior: oklch(0.21 0.02 240) */
+  --admin-sidebar-border: oklch(0.24 0.03 265); /* Un tono ligeramente más claro del mismo violeta */
+  
+  /*
+    El header tendrá el mismo color y borde que el sidebar para una apariencia unificada.
+  */
+  /* Anteriores: oklch(0.11 0.02 240) y oklch(0.21 0.02 240) */
+  --admin-header-bg: var(--admin-sidebar-bg);
+  --admin-header-border: var(--admin-sidebar-border);
+
+  /*
+    Ajustamos los colores de los links para que tengan buen contraste sobre el
+    nuevo fondo azulado.
+  */
+  /* Anterior: oklch(0.65 0.02 240) */
+  --admin-nav-link-inactive-text: oklch(0.7 0.02 265); /* Texto grisáceo con un ligero matiz frío */
+  
+  /* Anterior: oklch(0.55 0.02 240) */
+  --admin-nav-link-inactive-icon: oklch(0.6 0.02 265); /* Icono un poco más sutil */
+  
+  /*
+    El fondo del hover será un poco más claro que el sidebar, y el texto se volverá
+    el color primario de la marca para un feedback claro y elegante.
+  */
+  /* Anteriores: oklch(0.25 0.02 240) y oklch(1 0 0) */
+  --admin-nav-link-hover-bg: oklch(0.22 0.035 265);
+  --admin-nav-link-hover-text: var(--brand-primary);
+
+  /*
+    El link activo debe ser el que más destaque. Usaremos el color primario de la marca
+    con un fondo sutil para que resalte sobre los demás.
+  */
+  --admin-nav-link-active-bg: oklch(0.25 0.06 265); /* Fondo suave del color de la marca */
+  --admin-nav-link-active-text: var(--brand-primary); /* Texto con el color principal de la marca */
+}
+
+/* ========================================================================== */
+/*                         CLASES UTILITARIAS                                */
+/* ========================================================================== */
+
+/* 
+  Estas clases te permiten usar los colores fácilmente:
+  - bg-brand-primary, text-brand-primary, border-brand-primary
+  - bg-surface-primary, text-primary, border-primary
+  - etc.
+*/
+
+@theme inline {
+  /* Brand colors */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-tertiary: var(--brand-tertiary);
+
+  --color-brand-primary-soft: var(--brand-primary-soft);
+  --color-brand-secondary-soft: var(--brand-secondary-soft);
+  --color-brand-tertiary-soft: var(--brand-tertiary-soft);
+
+  /* Backgrounds */
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-overlay-backdrop: var(--overlay-backdrop);
+  
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse: var(--text-inverse);
+
+  /* Borders */
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-focus: var(--border-focus);
+
+  /* Interactive */
+  --color-interactive-primary: var(--interactive-primary);
+  --color-interactive-primary-hover: var(--interactive-primary-hover);
+  --color-interactive-secondary: var(--interactive-secondary);
+  --color-interactive-secondary-hover: var(--interactive-secondary-hover);
+
+  /* Status colors */
+  --color-success: var(--success-primary);
+  --color-success-soft: var(--success-soft);
+  --color-success-text: var(--success-text);
+
+  --color-warning: var(--warning-primary);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-text: var(--warning-text);
+
+  --color-error: var(--error-primary);
+  --color-error-soft: var(--error-soft);
+  --color-error-text: var(--error-text);
+
+  --color-info: var(--info-primary);
+  --color-info-soft: var(--info-soft);
+  --color-info-text: var(--info-text);
+
+
+  /* Extension de admin */
+  /* Para el link activo, mantenemos el color de la marca para que siga destacando */
+  --color-admin-sidebar-bg: var(--admin-sidebar-bg);
+  --color-admin-sidebar-border: var(--admin-sidebar-border);
+
+  --color-admin-header-bg: var(--admin-header-bg);
+  --color-admin-header-border: var(--admin-header-border);
+
+  --color-admin-nav-link-inactive-text: var(--admin-nav-link-inactive-text);
+  --color-admin-nav-link-inactive-icon: var(--admin-nav-link-inactive-icon);
+  
+  --color-admin-nav-link-hover-bg: var(--admin-nav-link-hover-bg);
+  --color-admin-nav-link-hover-text: var(--admin-nav-link-hover-text);
+
+  --color-admin-nav-link-active-bg: var(--admin-nav-link-active-bg);
+  --color-admin-nav-link-active-text: var(--admin-nav-link-active-text);
+}
+
+
+/* ========================================================================== */
+/*                           GUÍA DE USO                                     */
+/* ========================================================================== */
+
+/* 
+EJEMPLOS DE COMBINACIONES RECOMENDADAS:
+
+1. TARJETA PRINCIPAL:
+   - Fondo: bg-surface-primary
+   - Texto título: text-primary
+   - Texto descripción: text-secondary
+   - Borde: border-primary
+
+2. TARJETA SECUNDARIA:
+   - Fondo: bg-surface-secondary
+   - Texto título: text-primary
+   - Texto descripción: text-secondary
+   - Borde: border-primary
+
+3. BOTÓN PRIMARIO:
+   - Fondo: bg-interactive-primary (con hover automático)
+   - Texto: text-inverse
+   - Borde: border-brand-primary
+
+4. BOTÓN SECUNDARIO:
+   - Fondo: bg-interactive-secondary (con hover automático)
+   - Texto: text-primary
+   - Borde: border-secondary
+
+5. MENSAJE DE ÉXITO:
+   - Fondo: bg-success-soft
+   - Texto: text-success
+   - Icono: text-success
+
+6. SIDEBAR:
+   - Fondo: bg-background-secondary
+   - Texto activo: text-brand-primary
+   - Texto inactivo: text-secondary
+
+PARA CAMBIAR PALETA DE EMPRESA:
+Solo modifica estos valores en :root:
+- --brand-primary: [nuevo color principal]
+- --brand-secondary: [nuevo color secundario]  
+- --brand-tertiary: [nuevo color terciario]
+
+¡Y automáticamente toda la UI se actualiza!
+*/
