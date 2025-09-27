@@ -7,7 +7,7 @@ import grupo16.dssd_backend.helpers.BonitaSessionHolder;
 import grupo16.dssd_backend.services.I_BonitaService;
 import grupo16.dssd_backend.services.I_ProyectoService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,8 +41,11 @@ class APIControllerV1 implements I_API {
     @PostMapping("/crear-proyecto")
     public ResponseEntity<?> crearProyecto(@RequestBody ProyectoDTO proyectoDTO) {
 
-        if (BonitaSessionHolder.requireCurrent() == null) {
+        if (BonitaSessionHolder.getBonitaSession() == null) {
             return ResponseEntity.status(401).body("No autenticado");
+        }
+        if(!proyectoDTO.validate()){
+            return ResponseEntity.status(500).body("Datos invalidos");
         }
 
         this.proyectoService.createProject(proyectoDTO);

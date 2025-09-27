@@ -8,7 +8,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class BonitaSessionHolder {
 
-    public static BonitaSession requireCurrent() {
+    public static BonitaSession getBonitaSession() {
         var attrs = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         var session = attrs.getRequest().getSession(false);
         if (session == null) throw new IllegalStateException("Sin sesión");

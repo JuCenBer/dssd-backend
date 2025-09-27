@@ -9,5 +9,21 @@ public record ProyectoDTO(
         String ubicacion,
         Long caseId,
         List<ActividadDTO> actividades
-) {}
+) {
 
+    public boolean validate(){
+        if (nombre == null || nombre.isBlank()) {
+            return false;
+        }
+        if (descripcion == null || descripcion.isBlank()) {
+            return false;
+        }
+        if (ubicacion == null || ubicacion.isBlank()) {
+            return false;
+        }
+        if (actividades == null || actividades.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+}

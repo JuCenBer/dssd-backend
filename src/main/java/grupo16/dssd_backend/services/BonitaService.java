@@ -3,7 +3,6 @@ package grupo16.dssd_backend.services;
 import grupo16.dssd_backend.dtos.BonitaSession;
 import grupo16.dssd_backend.helpers.BonitaSessionHolder;
 import grupo16.dssd_backend.helpers.NombresProcesos;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,6 @@ import org.springframework.web.client.RestClient;
 
 import java.net.HttpCookie;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 class BonitaService implements I_BonitaService{
@@ -78,7 +76,7 @@ class BonitaService implements I_BonitaService{
             throw new IllegalStateException("No se encontró el proceso " + NombresProcesos.PROCESO_CREAR_PROYECTO);
         }
 
-        Long id = Long.valueOf(String.valueOf(resp.get()));
+        Long id = Long.valueOf(resp.get());
 
         // Instanciar proceso
 
@@ -94,7 +92,7 @@ class BonitaService implements I_BonitaService{
             throw new IllegalStateException("No hay tareas ready en el caso " + caseId);
         }
         String taskId = String.valueOf(tareas.get(0).get("id"));
-        this.asignarTareaAUsuario(taskId, BonitaSessionHolder.requireCurrent().userId());
+        this.asignarTareaAUsuario(taskId, BonitaSessionHolder.getBonitaSession().userId());
 
         // Ejecutar tarea
         this.ejecutarTareaDeUsuario(taskId, null);
@@ -170,7 +168,7 @@ class BonitaService implements I_BonitaService{
 
     private void withAuth(HttpHeaders headers) {
 
-        BonitaSession bonitaSession = BonitaSessionHolder.requireCurrent();
+        BonitaSession bonitaSession = BonitaSessionHolder.getBonitaSession();
         String jSessionId = bonitaSession.jsessionId();
         String xBonitaToken = bonitaSession.xBonitaToken();
 
