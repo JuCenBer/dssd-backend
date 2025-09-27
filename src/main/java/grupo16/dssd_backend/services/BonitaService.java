@@ -2,6 +2,8 @@ package grupo16.dssd_backend.services;
 
 import grupo16.dssd_backend.dtos.BonitaSession;
 import grupo16.dssd_backend.helpers.BonitaSessionHolder;
+import grupo16.dssd_backend.helpers.NombresProcesos;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -20,9 +22,6 @@ class BonitaService implements I_BonitaService{
 
     private final RestClient client;
     private final BonitaSessionHolder sessionHolder;
-
-    private final AtomicReference<String> jsessionId = new AtomicReference<>();
-    private final AtomicReference<String> xBonitaToken = new AtomicReference<>();
 
     public BonitaService(@Value("${bonita.base-url:http://localhost:8080/bonita}") String baseUrl, BonitaSessionHolder sessionHolder) {
         this.client = RestClient.builder()
@@ -61,10 +60,6 @@ class BonitaService implements I_BonitaService{
                             "Login Bonita: faltan cookies JSESSIONID/X-Bonita-API-Token.");
                 }
 
-                // También podés seguir guardándolos en el service si querés
-                jsessionId.set(js);
-                xBonitaToken.set(xt);
-
                 return new BonitaSession(username, js, xt, System.currentTimeMillis());
             });
     }
@@ -75,7 +70,39 @@ class BonitaService implements I_BonitaService{
     }
 
     @Override
-    public Optional<String> getEnabledProcessIdByName(String processName) {
+    public Long iniciarProcesoCreacionProyecto() {
+
+        // Buscar proceso por nombre, obtener id
+        Optional<String> resp = this.buscarProcesoPorNombre(NombresProcesos.PROCESO_CREAR_PROYECTO);
+        if (resp.isEmpty()) {
+            throw new IllegalStateException("No se encontró el proceso " + NombresProcesos.PROCESO_CREAR_PROYECTO);
+        }
+
+        Long id = Long.valueOf(String.valueOf(resp.get()));
+
+        // Instanciar proceso
+
+        Map<String, Object> instancia = this.instanciarProceso(String.valueOf(id), null);
+
+        String caseId = String.valueOf(instancia.get("caseId"));
+
+        // Obtener tareas del caso
+        List<Map<String, Object>> tareas = this.buscarTareasPorCaso(caseId);
+
+        // Asignar tarea a usuario
+        if (tareas.isEmpty()) {
+            throw new IllegalStateException("No hay tareas ready en el caso " + caseId);
+        }
+        String taskId = String.valueOf(tareas.get(0).get("id"));
+        this.asignarTareaAUsuario(taskId, BonitaSessionHolder.requireCurrent().userId());
+
+        // Ejecutar tarea
+        this.ejecutarTareaDeUsuario(taskId, null);
+
+        return Long.parseLong(caseId);
+    }
+
+    private Optional<String> buscarProcesoPorNombre(String processName) {
         List<Map<String, Object>> procs = client.get()
                 .uri(uriBuilder -> uriBuilder
                         .path("/API/bpm/process")
@@ -96,8 +123,7 @@ class BonitaService implements I_BonitaService{
             .map(m -> String.valueOf(m.get("id")));
     }
 
-    @Override
-    public Map<String, Object> instantiateProcess(String processId, Map<String, Object> contract) {
+    private Map<String, Object> instanciarProceso(String processId, Map<String, Object> contract) {
         return client.post()
             .uri("/API/bpm/process/{id}/instantiation", processId)
             .headers(this::withAuth)
@@ -107,8 +133,7 @@ class BonitaService implements I_BonitaService{
             .body(new ParameterizedTypeReference<Map<String, Object>>() {});
     }
 
-    @Override
-    public List<Map<String, Object>> findReadyTasksByCase(String caseId) {
+    private List<Map<String, Object>> buscarTareasPorCaso(String caseId) {
         return client.get()
             .uri(uriBuilder -> uriBuilder
                 .path("/API/bpm/humanTask")
@@ -122,8 +147,7 @@ class BonitaService implements I_BonitaService{
             .body(new ParameterizedTypeReference<List<Map<String, Object>>>() {});
     }
 
-    @Override
-    public void assignTask(String taskId, String userId) {
+    private void asignarTareaAUsuario(String taskId, String userId) {
         client.put()
             .uri("/API/bpm/humanTask/{id}", taskId)
             .headers(this::withAuth)
@@ -133,8 +157,8 @@ class BonitaService implements I_BonitaService{
             .toBodilessEntity();
     }
 
-    @Override
-    public void executeUserTask(String taskId, Map<String, Object> contract) {
+
+    public void ejecutarTareaDeUsuario(String taskId, Map<String, Object> contract) {
         client.post()
             .uri("/API/bpm/userTask/{id}/execution", taskId)
             .headers(this::withAuth)
@@ -145,14 +169,17 @@ class BonitaService implements I_BonitaService{
     }
 
     private void withAuth(HttpHeaders headers) {
-        String js = jsessionId.get();
-        String xt = xBonitaToken.get();
-        if (js == null || xt == null) {
+
+        BonitaSession bonitaSession = BonitaSessionHolder.requireCurrent();
+        String jSessionId = bonitaSession.jsessionId();
+        String xBonitaToken = bonitaSession.xBonitaToken();
+
+        if (jSessionId == null || xBonitaToken == null) {
             throw new IllegalStateException("No hay sesión Bonita. Llamá a login() primero.");
         }
-        headers.add(HttpHeaders.COOKIE, "JSESSIONID=" + js + "; X-Bonita-API-Token=" + xt);
+        headers.add(HttpHeaders.COOKIE, "JSESSIONID=" + jSessionId + "; X-Bonita-API-Token=" + xBonitaToken);
         // para POST/PUT/DELETE Bonita exige también el header X-Bonita-API-Token
-        headers.add("X-Bonita-API-Token", xt);
+        headers.add("X-Bonita-API-Token", xBonitaToken);
     }
 
     private static Map<String, String> parseSetCookieHeaders(List<String> setCookies) {

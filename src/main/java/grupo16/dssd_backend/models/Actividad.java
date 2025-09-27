@@ -1,18 +1,32 @@
 package grupo16.dssd_backend.models;
 
 import grupo16.dssd_backend.dtos.ActividadDTO;
+import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.Date;
 
+@Entity
 public class Actividad {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String nombre;
+
     private LocalDate fechaInicio;
+
     private LocalDate fechaFin;
+
     private Enum<Recurso> recurso;
+
     private Boolean requiereColaboracion;
+
+    @ManyToOne
+    @JoinColumn(name = "proyecto_id", nullable = false)
+    private Proyecto proyecto;
 
     public Actividad(){
 

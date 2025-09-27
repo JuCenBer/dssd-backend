@@ -3,9 +3,11 @@ package grupo16.dssd_backend.controllers;
 import grupo16.dssd_backend.dtos.BonitaSession;
 import grupo16.dssd_backend.dtos.LoginDTO;
 import grupo16.dssd_backend.dtos.ProyectoDTO;
+import grupo16.dssd_backend.helpers.BonitaSessionHolder;
 import grupo16.dssd_backend.services.I_BonitaService;
 import grupo16.dssd_backend.services.I_ProyectoService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,8 +39,13 @@ class APIControllerV1 implements I_API {
 
     @Override
     @PostMapping("/crear-proyecto")
-    public ResponseEntity<?> crearProyecto(@RequestBody ProyectoDTO request, HttpServletRequest httpReq) {
-        this.proyectoService.createProject(request);
+    public ResponseEntity<?> crearProyecto(@RequestBody ProyectoDTO proyectoDTO) {
+
+        if (BonitaSessionHolder.requireCurrent() == null) {
+            return ResponseEntity.status(401).body("No autenticado");
+        }
+
+        this.proyectoService.createProject(proyectoDTO);
         return ResponseEntity.ok().build();
     }
 

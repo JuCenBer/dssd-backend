@@ -2,16 +2,27 @@ package grupo16.dssd_backend.models;
 
 import grupo16.dssd_backend.dtos.ActividadDTO;
 import grupo16.dssd_backend.dtos.ProyectoDTO;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Proyecto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String nombre;
-    private String caseId;
+
+    private Long caseId;
+
     private String descripcion;
+
     private String ubicacion;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto", orphanRemoval = true)
     private List<Actividad> actividades;
 
     public Proyecto(){
@@ -46,11 +57,11 @@ public class Proyecto {
         return actividades;
     }
 
-    public String getCaseId() {
+    public Long getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(String caseId) {
+    public void setCaseId(Long caseId) {
         this.caseId = caseId;
     }
 }

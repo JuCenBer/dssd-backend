@@ -1,9 +1,10 @@
 services:
   postgres:
     image: 'postgres:latest'
+    command: [ "postgres", "-c", "TimeZone=America/Argentina/Buenos_Aires" ]
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=dssd-backend'
+      - 'POSTGRES_PASSWORD=dssd-backend'
+      - 'POSTGRES_USER=dssd-backend'
     ports:
       - '5432'
