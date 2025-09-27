@@ -1,5 +1,5 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import SmartForm from './SmartForm';
 import { notify } from '@/services/notificationService';
 import { TextInput, TextAreaInput } from './Inputs';
@@ -43,20 +43,10 @@ const Form2 = () => {
 
     const handleStartForm = async () => {
         try {
-         /*    const response = await fetch('bonita/iniciar_proyecto', {
-                method: 'POST',
-                // No envío body por ahora, asumiendo que el backend te identifica por la sesión.
-            });
-
-            const data = await response.json();
- */
+            login();
             notify({ type: 'success', message: 'Autenticación exitosa. Ya puedes crear tu proyecto.' });
-            setApiToken("sasafasf"); // Asumo que el backend devuelve un { token: '...' }
             setFormVisible(true);
-           /*  if (response.ok) {
-            } else {
-                throw new Error(data.message || 'Error al iniciar el proceso.');
-            } */
+        
         } catch (error) {
             console.error('Error en handleStartForm:', error);
             notify({ type: 'error', message: error.message });
@@ -87,9 +77,27 @@ const Form2 = () => {
         setFormVisible(false); // Opcional: Ocultar el form y volver al botón de inicio
     };
 
+        
+    const login = async () => {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/login`, {
+            method: 'POST',
+            body: JSON.stringify({ username: 'user', password: 'pass' }),
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        });
+        
+        console.log(response)
+
+        if(response.ok) {
+            console.log(response.headers)
+        }
+    }
+
+
+
     if (!formVisible) {
         return (
-            <div className="flex justify-center items-center h-full">
+            <div className="flex justify-center items-center h-screen">
                 <button
                     onClick={handleStartForm}
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -104,7 +112,7 @@ const Form2 = () => {
         <div className="p-4 md:p-8">
             <h2 className="text-2xl font-bold mb-6 text-center">Crear Nuevo Proyecto</h2>
             <SmartForm
-                url="/crear_proyecto"
+                url={`${import.meta.env.VITE_API_URL}/api/v1/crear-proyecto`}
                 submitText="Crear Proyecto"
                 validations={validations}
                 onSuccess={handleSuccess}

@@ -11,7 +11,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  server: {
+  /* server: {
     proxy: {
       '/bonita': {
         target: 'http://localhost:8080',
@@ -49,5 +49,5 @@ export default defineConfig({
         },
       },
     },
-  }, 
+  }, */
 })
