@@ -67,8 +67,19 @@ const Form2 = () => {
             message: 'La ubicación es obligatoria.'
         },
         actividades: {
-            function: (value) => Array.isArray(value) && value.length > 0,
-            message: 'Debes añadir al menos una actividad.'
+            function: (activities) => {
+                if (!Array.isArray(activities) || activities.length === 0) return false;
+
+                // Recorremos cada actividad y chequeamos todos los campos
+                return activities.every(act => 
+                    act.nombre?.trim() &&
+                    act.fechaInicio?.trim() &&
+                    act.fechaFin?.trim() &&
+                    act.recurso?.trim() !== undefined &&
+                    typeof act.requiereColaboracion === 'boolean'
+                );
+            },
+            message: 'Todas las actividades deben tener todos los campos completos.'
         }
     };
 
@@ -112,7 +123,7 @@ const Form2 = () => {
         <div className="p-4 md:p-8">
             <h2 className="text-2xl font-bold mb-6 text-center">Crear Nuevo Proyecto</h2>
             <SmartForm
-                url={`${import.meta.env.VITE_API_URL}/api/v1/crear-proyecto`}
+                url={`/api/v1/crear-proyecto`}
                 submitText="Crear Proyecto"
                 validations={validations}
                 onSuccess={handleSuccess}
