@@ -92,7 +92,7 @@ const Form2 = () => {
     const login = async () => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/login`, {
             method: 'POST',
-            body: JSON.stringify({ username: 'user', password: 'pass' }),
+            body: JSON.stringify({ username: 'walter.bates', password: 'bpm' }),
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         });
