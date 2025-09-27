@@ -3,6 +3,8 @@ package grupo16.dssd_backend.services;
 import grupo16.dssd_backend.dtos.BonitaSession;
 import grupo16.dssd_backend.helpers.BonitaSessionHolder;
 import grupo16.dssd_backend.helpers.NombresProcesos;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -20,8 +22,9 @@ class BonitaService implements I_BonitaService{
 
     private final RestClient client;
     private final BonitaSessionHolder sessionHolder;
+    private static final Logger logger = LoggerFactory.getLogger(BonitaService.class);
 
-    public BonitaService(@Value("${bonita.base-url:http://localhost:8080/bonita}") String baseUrl, BonitaSessionHolder sessionHolder) {
+    public BonitaService(@Value("${external.service.url}/bonita") String baseUrl, BonitaSessionHolder sessionHolder) {
         this.client = RestClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
@@ -77,12 +80,14 @@ class BonitaService implements I_BonitaService{
         }
 
         Long id = Long.valueOf(resp.get());
+        logger.info("PROCESO ENCONTRADO: "+ resp.get());
 
         // Instanciar proceso
 
         Map<String, Object> instancia = this.instanciarProceso(String.valueOf(id), null);
 
         String caseId = String.valueOf(instancia.get("caseId"));
+        logger.info("CASE ID: "+ caseId);
 
         // Obtener tareas del caso
         List<Map<String, Object>> tareas = this.buscarTareasPorCaso(caseId);
@@ -111,7 +116,7 @@ class BonitaService implements I_BonitaService{
                         .build())
                 .headers(this::withAuth)
                 .retrieve()
-                .body(new ParameterizedTypeReference<List<Map<String, Object>>>() {});
+                .body(new ParameterizedTypeReference<>() {});
 
         if (procs == null || procs.isEmpty()) return Optional.empty();
 
@@ -171,6 +176,8 @@ class BonitaService implements I_BonitaService{
         BonitaSession bonitaSession = BonitaSessionHolder.getBonitaSession();
         String jSessionId = bonitaSession.jsessionId();
         String xBonitaToken = bonitaSession.xBonitaToken();
+
+        logger.info("SESIÓN RECUPERADA: " + jSessionId + " " + xBonitaToken);
 
         if (jSessionId == null || xBonitaToken == null) {
             throw new IllegalStateException("No hay sesión Bonita. Llamá a login() primero.");
