@@ -97,7 +97,11 @@ class BonitaService implements I_BonitaService{
             throw new IllegalStateException("No hay tareas ready en el caso " + caseId);
         }
         String taskId = String.valueOf(tareas.get(0).get("id"));
-        this.asignarTareaAUsuario(taskId, BonitaSessionHolder.getBonitaSession().userId());
+
+        String userId = this.getUserId();
+
+        this.asignarTareaAUsuario(taskId, userId);
+        logger.info("USER ID: "+ userId);
 
         // Ejecutar tarea
         this.ejecutarTareaDeUsuario(taskId, null);
@@ -198,5 +202,24 @@ class BonitaService implements I_BonitaService{
             }
         }
         return out;
+    }
+
+    private String getUserId(){
+        String username = "walter.bates"; // el usuario con el que te logueaste
+        String userId = null;
+        List<Map<String, Object>> users = client.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/API/identity/user")
+                        .queryParam("f", "userName=" + username)
+                        .build())
+                .cookie("JSESSIONID", BonitaSessionHolder.getBonitaSession().jsessionId()) // js es el valor de la cookie de sesión
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<Map<String, Object>>>() {});
+
+        // Ahora podés obtener el id
+        if (users != null && !users.isEmpty()) {
+            userId = (String) users.get(0).get("id");
+        }
+        return userId;
     }
 }
