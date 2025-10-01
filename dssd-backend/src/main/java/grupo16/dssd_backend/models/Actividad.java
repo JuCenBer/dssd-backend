@@ -2,10 +2,8 @@ package grupo16.dssd_backend.models;
 
 import grupo16.dssd_backend.dtos.ActividadDTO;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Actividad {
@@ -20,7 +18,8 @@ public class Actividad {
 
     private LocalDate fechaFin;
 
-    private Enum<Recurso> recurso;
+    @Enumerated(EnumType.STRING)
+    private Recurso recurso;
 
     private Boolean requiereColaboracion;
 
@@ -65,11 +64,11 @@ public class Actividad {
         this.fechaFin = fechaFin;
     }
 
-    public Enum<Recurso> getRecurso() {
+    public Recurso getRecurso() {
         return recurso;
     }
 
-    public void setRecurso(Enum<Recurso> recurso) {
+    public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
     }
 
