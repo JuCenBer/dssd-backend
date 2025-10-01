@@ -21,16 +21,13 @@ import java.util.*;
 class BonitaService implements I_BonitaService{
 
     private final RestClient client;
-    private final BonitaSessionHolder sessionHolder;
     private static final Logger logger = LoggerFactory.getLogger(BonitaService.class);
 
-    public BonitaService(@Value("${external.service.url}/bonita") String baseUrl, BonitaSessionHolder sessionHolder) {
+    public BonitaService(@Value("${external.service.url}/bonita") String baseUrl) {
         this.client = RestClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
-
-        this.sessionHolder = sessionHolder;
     }
 
     @Override
@@ -71,7 +68,7 @@ class BonitaService implements I_BonitaService{
     }
 
     @Override
-    public Long iniciarProcesoCreacionProyecto() {
+    public Long iniciarProcesoCreacionProyecto(String nombre) {
 
         // Buscar proceso por nombre, obtener id
         Optional<String> resp = this.buscarProcesoPorNombre(NombresProcesos.PROCESO_CREAR_PROYECTO);
@@ -84,7 +81,7 @@ class BonitaService implements I_BonitaService{
 
         // Instanciar proceso
 
-        Map<String, Object> instancia = this.instanciarProceso(String.valueOf(id), null);
+        Map<String, Object> instancia = this.instanciarProceso(String.valueOf(id), nombre);
 
         String caseId = String.valueOf(instancia.get("caseId"));
         logger.info("CASE ID: "+ caseId);
@@ -101,7 +98,9 @@ class BonitaService implements I_BonitaService{
         String userId = this.getUserId();
 
         this.asignarTareaAUsuario(taskId, userId);
-        logger.info("USER ID: "+ userId);
+        logger.info("TAREA ASIGNADA: "+ userId);
+
+        this.setVariablesCase(caseId, Map.of("nombre", nombre));
 
         // Ejecutar tarea
         this.ejecutarTareaDeUsuario(taskId, null);
@@ -130,12 +129,14 @@ class BonitaService implements I_BonitaService{
             .map(m -> String.valueOf(m.get("id")));
     }
 
-    private Map<String, Object> instanciarProceso(String processId, Map<String, Object> contract) {
+    private Map<String, Object> instanciarProceso(String processId, String nombre) {
+        Map<String, Object> body = Map.of("nombre", nombre);
+
         return client.post()
             .uri("/API/bpm/process/{id}/instantiation", processId)
             .headers(this::withAuth)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(contract != null ? contract : Map.of())
+            .body(body)
             .retrieve()
             .body(new ParameterizedTypeReference<Map<String, Object>>() {});
     }
@@ -152,6 +153,43 @@ class BonitaService implements I_BonitaService{
             .headers(this::withAuth)
             .retrieve()
             .body(new ParameterizedTypeReference<List<Map<String, Object>>>() {});
+    }
+
+    private void setVariablesCase(String caseId, Map<String, Object> variables) {
+
+        for (Map.Entry<String, Object> entry : variables.entrySet()) {
+            String varName = entry.getKey();
+            Map<String, Object> body = crearBodyVariable(entry);
+
+            client.put()
+                    .uri("/API/bpm/caseVariable/{caseId}/{varName}", caseId, varName)
+                    .headers(this::withAuth)
+                    .body(body)
+                    .retrieve()
+                    .toBodilessEntity();
+        }
+    }
+
+    private static Map<String, Object> crearBodyVariable(Map.Entry<String, Object> entry) {
+        Object value = entry.getValue();
+
+        String type = switch (value) {
+            case String s -> "java.lang.String";
+            case Integer i -> "java.lang.Integer";
+            case Long l -> "java.lang.Long";
+            case Double v -> "java.lang.Double";
+            case Boolean b -> "java.lang.Boolean";
+            case null, default -> {
+                assert value != null;
+                throw new IllegalArgumentException("Tipo no soportado: " + value.getClass());
+            }
+        };
+
+        Map<String, Object> body = Map.of(
+                "type", type,
+                "value", value.toString()
+        );
+        return body;
     }
 
     private void asignarTareaAUsuario(String taskId, String userId) {

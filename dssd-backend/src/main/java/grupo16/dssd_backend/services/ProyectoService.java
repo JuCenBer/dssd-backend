@@ -1,7 +1,6 @@
 package grupo16.dssd_backend.services;
 
 import grupo16.dssd_backend.dtos.ProyectoDTO;
-import grupo16.dssd_backend.helpers.NombresProcesos;
 import grupo16.dssd_backend.models.Proyecto;
 import grupo16.dssd_backend.repositories.ProyectoRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,7 @@ public class ProyectoService implements I_ProyectoService{
         // AGREGAR VALLIDACIÓN DE DATOS
         Proyecto newProyecto = new Proyecto(proyectoDTO);
 
-        Long caseId = this.bonitaService.iniciarProcesoCreacionProyecto();
+        Long caseId = this.bonitaService.iniciarProcesoCreacionProyecto(newProyecto.getNombre());
 
         newProyecto.setCaseId(caseId);
 
