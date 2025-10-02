@@ -53,7 +53,7 @@ export const TextInput = ({
           </button>
         )}
       </div>
-      {error && <p className="mt-1 text-sm text-error-primary">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };
@@ -101,7 +101,7 @@ export const PasswordInput = ({
           {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
         </button>
       </div>
-      {error && <p className="mt-1 text-sm text-error-primary">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };
@@ -179,7 +179,7 @@ export const SelectInput = ({
           </div>
         )}
       </div>
-      {error && <p className="mt-1 text-sm text-error-primary">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };
@@ -354,7 +354,7 @@ export const SearchSelectInput = ({
         </div>
   
       </div>
-      {error && <p className="mt-1 text-sm text-error-primary">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
       {isOpen && (
         <ul className="absolute z-10 w-full mt-1 overflow-y-auto bg-surface-primary border border-border-primary rounded-md shadow-lg max-h-60">
           {filteredOptions.length > 0 ? (
@@ -409,7 +409,7 @@ export const TextAreaInput = ({
         value={value || ""}
         rows={rows}
       />
-      {error && <p className="mt-1 text-sm text-error-primary">{error}</p>}
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };

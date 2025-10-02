@@ -80,7 +80,8 @@ const SmartForm = ({
 
       switch (response.status) {
         case 200:
-          onSuccess(responseData);
+          let data = responseData && responseData.data ? responseData.data : formData;
+          onSuccess(data);
           break;
 
         case 401:

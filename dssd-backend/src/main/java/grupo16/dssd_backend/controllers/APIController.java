@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -31,22 +32,31 @@ class APIControllerV1 implements I_API {
         var session = httpReq.getSession(true);
         session.setAttribute("bonitaSession", new BonitaSession(
                 req.username(), cookies.jsessionId(), cookies.xBonitaToken(), System.currentTimeMillis()));
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(Map.of("message", "Sesion iniciada correctamente"));
     }
 
     @Override
     @PostMapping("/crear-proyecto")
     public ResponseEntity<?> crearProyecto(@RequestBody ProyectoDTO proyectoDTO) {
 
+        //if (BonitaSessionHolder.getBonitaSession() == null) {
+        //    return ResponseEntity.status(401).body("No autenticado");
+ //       }
+   //     if(!proyectoDTO.validate()){
+     //       return ResponseEntity.status(500).body("Datos invalidos");
+       // }
+
+        //this.proyectoService.createProject(proyectoDTO);
+        //return ResponseEntity.ok().build();
         if (BonitaSessionHolder.getBonitaSession() == null) {
-            return ResponseEntity.status(401).body("No autenticado");
+            return ResponseEntity.status(401).body(Map.of("error", "No autenticado"));
         }
         if(!proyectoDTO.validate()){
-            return ResponseEntity.status(500).body("Datos invalidos");
+            return ResponseEntity.status(400).body(Map.of("error", "Datos inválidos"));
         }
 
         this.proyectoService.createProject(proyectoDTO);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(Map.of("message", "Proyecto creado exitosamente"));
     }
 
     @Override
