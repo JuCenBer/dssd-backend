@@ -87,11 +87,13 @@ class BonitaService implements I_BonitaService{
         logger.info("CASE ID: "+ caseId);
 
         // Obtener tareas del caso
-        List<Map<String, Object>> tareas = this.buscarTareasPorCaso(caseId);
+        List<Map<String, Object>> tareas =
+                this.buscarTareasPorCaso(caseId);
 
         // Asignar tarea a usuario
-        if (tareas.isEmpty()) {
-            throw new IllegalStateException("No hay tareas ready en el caso " + caseId);
+        while (tareas.isEmpty()) {
+            logger.info("No hay tareas ready en el caso " + caseId);
+            tareas = this.buscarTareasPorCaso(caseId);
         }
         String taskId = String.valueOf(tareas.get(0).get("id"));
 

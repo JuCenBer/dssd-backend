@@ -281,7 +281,7 @@ const Form2 = () => {
                                     value={formData.nombre || ''}
                                     onChange={handleChange}
                                     error={errors.nombre}
-                                    placeholder="Ej: Desarrollo de nuevo módulo"
+                                    placeholder="Ej: Reparaciones de viviendas"
                                 />
                                 <TextAreaInput
                                     name="descripcion"
@@ -289,7 +289,7 @@ const Form2 = () => {
                                     value={formData.descripcion || ''}
                                     onChange={handleChange}
                                     error={errors.descripcion}
-                                    placeholder="Ej: Un módulo para gestionar inventario"
+                                    placeholder="Ej: Proyecto para reparar viviendas afectadas por un reciente desastre natural."
                                     rows={4}
                                 />
                                 <TextInput
@@ -298,7 +298,7 @@ const Form2 = () => {
                                     value={formData.ubicacion || ''}
                                     onChange={handleChange}
                                     error={errors.ubicacion}
-                                    placeholder="Ej: Oficina central"
+                                    placeholder="Ej: Bahía Blanca, Argentina"
                                 />
 
                                 <div className="mt-6">
@@ -321,7 +321,7 @@ const Form2 = () => {
                                                         label="Nombre Actividad"
                                                         value={activity.nombre}
                                                         onChange={(e) => handleActivityChange(index, 'nombre', e.target.value)}
-                                                        placeholder="Ej: Diseño de UI"
+                                                        placeholder="Ej: Relevamiento de daños"
                                                         error={errors.actividades?.nombre}
                                                     />
                                                     
