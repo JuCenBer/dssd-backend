@@ -32,7 +32,7 @@ class APIControllerV1 implements I_API {
         var session = httpReq.getSession(true);
         session.setAttribute("bonitaSession", new BonitaSession(
                 req.username(), cookies.jsessionId(), cookies.xBonitaToken(), System.currentTimeMillis()));
-        return ResponseEntity.ok().build(Map.of("message", "Sesion iniciada correctamente"));
+        return ResponseEntity.ok().body(Map.of("message", "Sesion iniciada correctamente"));
     }
 
     @Override
