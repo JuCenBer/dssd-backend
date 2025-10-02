@@ -8,7 +8,7 @@ public interface I_BonitaService {
 
     void logout(BonitaSession session);
 
-    Long iniciarProcesoCreacionProyecto();
+    Long iniciarProcesoCreacionProyecto(String nombre);
 
 //    Optional<String> getEnabledProcessIdByName(String processName);
 

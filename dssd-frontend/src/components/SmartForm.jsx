@@ -72,7 +72,8 @@ const SmartForm = ({
           "Content-Type": "application/json",
           "Authorization": token
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        credentials: "include"
       });
 
       const responseData = await response.json();

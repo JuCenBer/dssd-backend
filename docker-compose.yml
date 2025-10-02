@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./dssd-frontend
+    container_name: react-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./dssd-frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
+    depends_on:
+      - backend
+
+  backend:
+    build: ./dssd-backend
+    container_name: spring-backend
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/dssd-backend
+      - SPRING_DATASOURCE_USERNAME=dssd-backend
+      - SPRING_DATASOURCE_PASSWORD=dssd-backend
+      - SERVICE_URL=http://host.docker.internal:8080
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    restart: always
+    command: [ "postgres", "-c", "TimeZone=America/Argentina/Buenos_Aires" ]
+    environment:
+      - 'POSTGRES_DB=dssd-backend'
+      - 'POSTGRES_PASSWORD=dssd-backend'
+      - 'POSTGRES_USER=dssd-backend'
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

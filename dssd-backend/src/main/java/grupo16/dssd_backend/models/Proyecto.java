@@ -34,7 +34,7 @@ public class Proyecto {
         this.caseId = proyectoDTO.caseId();
         this.descripcion = proyectoDTO.descripcion();
         this.ubicacion = proyectoDTO.ubicacion();
-        this.actividades = proyectoDTO.actividades().stream().map(Actividad::new).toList();
+        this.actividades = proyectoDTO.actividades().stream().map(actDTO -> new Actividad(actDTO, this)).toList();
     }
 
     public String getNombre() {
