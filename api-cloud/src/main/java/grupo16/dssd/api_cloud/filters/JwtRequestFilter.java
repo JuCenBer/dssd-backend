@@ -1,6 +1,6 @@
 package grupo16.dssd.api_cloud.filters;
 
-import grupo16.dssd.api_cloud.services.MyUserDetailsService;
+import grupo16.dssd.api_cloud.services.users.MyUserDetailsService;
 import grupo16.dssd.api_cloud.utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

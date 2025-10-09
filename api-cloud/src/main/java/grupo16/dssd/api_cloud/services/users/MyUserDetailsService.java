@@ -1,4 +1,4 @@
-package grupo16.dssd.api_cloud.services;
+package grupo16.dssd.api_cloud.services.users;
 
 import grupo16.dssd.api_cloud.models.CustomUserDetails;
 import grupo16.dssd.api_cloud.models.User;
