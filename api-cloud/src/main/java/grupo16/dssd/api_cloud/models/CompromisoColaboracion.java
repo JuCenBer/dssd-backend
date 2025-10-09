@@ -13,6 +13,8 @@ public class CompromisoColaboracion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_compromiso_id", nullable = false)
     private User userCompromiso;
 
     private String descripcion;

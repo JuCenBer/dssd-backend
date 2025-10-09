@@ -24,8 +24,10 @@ public class User {
     @Column(name = "api_key")
     private String apiKey;
 
+    @OneToMany(mappedBy = "userPedido")
     private List<PedidoColaboracion> pedidosColaboracion;
 
+    @OneToMany(mappedBy = "userCompromiso")
     private List<CompromisoColaboracion> compromisosColaboracion;
 
 

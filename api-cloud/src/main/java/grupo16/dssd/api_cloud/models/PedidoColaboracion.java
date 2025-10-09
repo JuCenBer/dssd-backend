@@ -16,6 +16,8 @@ public class PedidoColaboracion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "user_pedido_id", nullable = false)
     private User userPedido;
 
     // Atributos de la Actividad:
