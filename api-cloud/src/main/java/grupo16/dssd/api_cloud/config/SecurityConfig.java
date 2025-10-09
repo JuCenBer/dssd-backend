@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 // Just for wide rules, like public endpoints, /admin...
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/auth/**").permitAll() // login/register
+                                .requestMatchers("api/v1/auth/**").permitAll() // login/register
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
