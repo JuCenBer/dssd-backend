@@ -1,5 +1,6 @@
 package grupo16.dssd.api_cloud.models;
 
+import grupo16.dssd.api_cloud.dtos.CollaborationRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,10 @@ public class PedidoColaboracion {
     @JoinColumn(name = "user_pedido_id", nullable = false)
     private User userPedido;
 
+    @ManyToOne
+    @JoinColumn(name="proyecto_pedido_id", nullable = false)
+    private Proyecto proyectoPedido;
+
     // Atributos de la Actividad:
     private String nombre;
 
@@ -34,9 +39,6 @@ public class PedidoColaboracion {
     private List<CompromisoColaboracion> compromisosColaboracion;
 
     // Preguntar si haría falta info del proyecto
-
-
-
 
 
 }
