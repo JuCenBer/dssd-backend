@@ -1,4 +1,4 @@
-package grupo16.dssd.api_cloud.controllers.colaboracion.compromiso;
+package grupo16.dssd.api_cloud.controllers.colaboracion;
 
 import grupo16.dssd.api_cloud.dtos.CollaborationRequestDTO;
 import grupo16.dssd.api_cloud.services.requests.CollaborationRequestService;
@@ -18,7 +18,7 @@ public class CollaborationRequestController implements I_CollaborationRequestCon
     @Override
     @PostMapping("/create")
     public ResponseEntity<?> createRequest(@RequestBody CollaborationRequestDTO request) {
-        this.collaborationRequestService.createCollaboration(request);
-        return null;
+        this.collaborationRequestService.createCollaborationRequest(request);
+        return ResponseEntity.ok("Colaboracion creada.");
     }
 }

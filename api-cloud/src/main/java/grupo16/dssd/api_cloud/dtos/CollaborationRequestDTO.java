@@ -12,8 +12,9 @@ import java.time.LocalDate;
 @Setter
 public class CollaborationRequestDTO {
 
+    //esto hay que acomodarlo para que sean DTO
     private User userPedido;
-    private Proyecto proyectoPedido;
+    private Long proyectoId;
     private String nombre;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
